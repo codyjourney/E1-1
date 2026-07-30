@@ -12,11 +12,11 @@
 - [O] 권한 변경 실습
 - [O] Docker 설치/점검
 - [O] hello-world 실행
-- [O] Dockerfile 빌드/실행
-- [O] 포트 매핑 접속(2회)
-- [O] 바인드 마운트 반영
-- [O] 볼륨 영속성
-- [O] Git 설정 + VSCode GitHub 연동
+- [X] Dockerfile 빌드/실행
+- [X] 포트 매핑 접속(2회)
+- [X] 바인드 마운트 반영
+- [X] 볼륨 영속성
+- [O] Git 설정 + GitHub 연동
 
 ## 4. 검증 방법 + 결과 위치
 - 터미널 기본 조작 및 폴더 구성
@@ -60,8 +60,24 @@
 상세 로그: [바인드 마운트 반영](./docs/docker-log.md)
 - 볼륨 영속성
 상세 로그: [볼륨 영속성](./docs/docker-log.md)
-- Git 설정 + VSCode GitHub 연동
+- Git 설정 + GitHub 연동
 상세 스크린샷: (./screenshots/)
+% git config --list
+credential.helper=osxkeychain
+user.name=홍길동
+user.email=hong@example.com
+init.defaultbranch=Main
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+core.ignorecase=true
+core.precomposeunicode=true
+remote.origin.url=https://github.com/[user]/E1-1.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.Main.remote=origin
+branch.Main.merge=refs/heads/Main
+
 
 
 | 항목 | 검증 명령 | 결과 위치 |

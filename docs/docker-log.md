@@ -280,28 +280,20 @@ e60b2b13ea93   ubuntu        "/bin/bash"               6 minutes ago    Exited (
 
 
 ##### Ctrl+P+Q 사용 시 (컨테이너 유지)
-
-```bash
-docker start -ai my-ubuntu
-# 내부에서 Ctrl+P+Q
-docker ps | grep my-ubuntu
-```
-
-```
-(출력 결과 붙여넣기 - STATUS: Up)
-```
+% docker start -ai my-ubuntu
+root@e60b2b13ea93:/# %                                                            % docker ps | grep my-ubuntu
+e60b2b13ea93   ubuntu    "/bin/bash"               8 minutes ago    Up 16 seconds                                             my-ubuntu
 
 ##### exec 재진입
 
-```bash
-docker exec -it my-ubuntu /bin/bash
-```
+% docker exec -it my-ubuntu /bin/bash
+root@e60b2b13ea93:/# 
 
-```
-(출력 결과 붙여넣기)
-```
+💡 attach vs exec 차이
 
----
+방식	명령어	특징
+attach	docker attach	기존 프로세스에 연결, exit 시 컨테이너 종료
+exec	docker exec -it	새 프로세스 생성, exit해도 컨테이너 유지
 
 #### 6. 종료/유지 방식 비교 정리
 
@@ -312,26 +304,76 @@ docker exec -it my-ubuntu /bin/bash
 | 재진입 | `docker exec -it` | Up 상태에서 진입 | 실행 중 컨테이너에 추가 작업 |
 | 재연결 | `docker attach` | Up 상태에서 연결 | 기존 세션에 재연결 (exit 시 종료 주의) |
 
----
-
 #### 7. 컨테이너 정리
-
-```bash
-docker stop my-ubuntu
-docker rm my-ubuntu
-docker ps -a
-```
-
-```
-(출력 결과 붙여넣기)
-```
+% docker stop my-ubuntu
+my-ubuntu
+% docker rm my-ubuntu
+my-ubuntu
+% docker ps -a
+CONTAINER ID   IMAGE         COMMAND                   CREATED          STATUS                      PORTS                                     NAMES
+d63cad256633   hello-world   "/hello"                  12 minutes ago   Exited (0) 12 minutes ago                                             mystifying_euclid
+7e4d7bd82c51   nginx         "/docker-entrypoint.…"   20 minutes ago   Up 20 minutes               0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-nginx
+0fc214599b44   hello-world   "/hello"                  20 minutes ago   Exited (0) 20 minutes ago                                             eloquent_tharp
 
 
 
 ### 기존 Dockerfile 기반 커스텀 이미지 제작
 
 #### 
-
+% ls
+Dockerfile	html
+% docker build -t custom-nginx:1.0 .
+[+] Building 0.9s (7/7) FINISHED                                            docker:orbstack
+ => [internal] load build definition from Dockerfile                                   0.1s
+ => => transferring dockerfile: 1.06kB                                                 0.0s
+ => [internal] load metadata for docker.io/library/nginx:alpine                        0.4s
+ => [internal] load .dockerignore                                                      0.1s
+ => => transferring context: 2B                                                        0.0s
+ => [internal] load build context                                                      0.1s
+ => => transferring context: 61B                                                       0.0s
+ => [1/2] FROM docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b6  0.0s
+ => CACHED [2/2] COPY html/index.html /usr/share/nginx/html/index.html                 0.0s
+ => exporting to image                                                                 0.0s
+ => => exporting layers                                                                0.0s
+ => => writing image sha256:cb5588522c45a1972f155c1802e9be9084a72c023f72993cbb340462f  0.0s
+ => => naming to docker.io/library/custom-nginx:1.0                                    0.0s
+% docker run -d --name my-custom-nginx -p 8080:80 custom-nginx:1.0
+794a61650a426b362e5217419d17da1d3a76f7d1f3565a8fd1afd3139b130d2c
+% curl http://localhost:8080
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="ko"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;My Custom Nginx&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body { font-family: sans-serif; text-align: center; padding: 50px; background: #f0f4f8; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>h1 <span class="Apple-converted-space">  </span>{ color: #2d6a4f; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p<span class="Apple-converted-space">    </span>{ color: #555; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;Custom Nginx Container&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;p&gt;베이스 이미지: nginx:alpine&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;p&gt;빌드 성공!&lt;/p&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
+% docker inspect --format='{{.State.Health.Status}}' my-custom-nginx
+starting
 
 #### 
 
