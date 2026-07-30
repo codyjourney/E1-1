@@ -8,17 +8,62 @@
 - Git: 2.53.0
 
 ## 3) 수행 체크리스트
-- [x] 터미널 기본 조작 및 폴더 구성
-- [x] 권한 변경 실습
-- [x] Docker 설치/점검
-- [x] hello-world 실행
-- [x] Dockerfile 빌드/실행
-- [x] 포트 매핑 접속(2회)
-- [x] 바인드 마운트 반영
-- [x] 볼륨 영속성
-- [x] Git 설정 + VSCode GitHub 연동
+- [O] 터미널 기본 조작 및 폴더 구성
+- [O] 권한 변경 실습
+- [O] Docker 설치/점검
+- [O] hello-world 실행
+- [O] Dockerfile 빌드/실행
+- [O] 포트 매핑 접속(2회)
+- [O] 바인드 마운트 반영
+- [O] 볼륨 영속성
+- [O] Git 설정 + VSCode GitHub 연동
 
 ## 4. 검증 방법 + 결과 위치
+- 터미널 기본 조작 및 폴더 구성
+상세 로그: [터미널 조작 로그](./docs/terminal-log.md)
+- 권한 변경 실습
+-rwxr-xr-x
+ ↑↑↑↑↑↑↑↑↑
+ │└──┘└──┘└──┘
+ │ 소유자  그룹  others
+ │
+ └ 파일 종류 (- = 파일, d = 디렉토리)
+숫자	의미	기호
+7	읽기+쓰기+실행	rwx
+6	읽기+쓰기	rw-
+5	읽기+실행	r-x
+4	읽기만	r--
+0	권한 없음	---
+상세 로그: [권한 실습 및 증거](./docs/terminal-log.md)
+- Docker 설치/점검
+상세 로그: [Docker 설치/점검](./docs/docker-log.md)
+운영 명령 요약
+| 분류 | 명령어 | 설명 |
+|------|--------|------|
+| 이미지 | `docker pull` | 이미지 다운로드 |
+| 이미지 | `docker images` | 이미지 목록 확인 |
+| 컨테이너 | `docker run` | 컨테이너 실행 |
+| 컨테이너 | `docker ps` | 실행 중 목록 |
+| 컨테이너 | `docker ps -a` | 전체 목록 |
+| 운영 | `docker logs` | 로그 확인 |
+| 운영 | `docker stats` | 리소스 확인 |
+| 정리 | `docker stop` | 컨테이너 중지 |
+| 정리 | `docker rm` | 컨테이너 삭제 |
+- hello-world 실행
+상세 로그: [hello-world 실행](./docs/docker-log.md)
+- Dockerfile 빌드/실행
+상세 로그: [Dockerfile 빌드/실행](./docs/docker-log.md)
+- 포트 매핑 접속(2회)
+상세 로그: [포트 매핑 접속(2회)](./docs/docker-log.md)
+상세 스크린샷: (./screenshots/)
+- 바인드 마운트 반영
+상세 로그: [바인드 마운트 반영](./docs/docker-log.md)
+- 볼륨 영속성
+상세 로그: [볼륨 영속성](./docs/docker-log.md)
+- Git 설정 + VSCode GitHub 연동
+상세 스크린샷: (./screenshots/)
+
+
 | 항목 | 검증 명령 | 결과 위치 |
 |------|-----------|-----------|
 | 포트 매핑 | curl http://localhost:8080 | screenshots/port-8080.png |
@@ -36,20 +81,4 @@
 - 원인 가설: ...
 - 확인: ...
 - 해결/대안: ...
-
-
-## 3) 수행 로그(발췌)
-- 실행 환경
-% sw_vers
-ProductName:		macOS
-ProductVersion:		15.7.4
-BuildVersion:		24G517
-% echo $SHELL
-/bin/zsh
-% docker --version
-Docker version 28.5.2, build ecc6942
-% git --version
-git version 2.53.0
-
-- 실행 환경
 
