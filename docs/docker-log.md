@@ -3,10 +3,14 @@
 ### Docker 설치 및 기본 점검
 
 #### 버전 확인
+'''
 % docker --version
 Docker version 28.5.2, build ecc6942
+'''
+
 
 #### 데몬 동작 여부
+'''
 % docker info
 Client:
  Version:    28.5.2
@@ -104,12 +108,13 @@ Server:
    Base: fd07:b51a:cc66:d000::/56, Size: 64
 
 WARNING: DOCKER_INSECURE_NO_IPTABLES_RAW is set
-
+'''
 
 
 ### Docker 기본 운영 명령 수행
 
 #### 이미지: 다운로드/목록 확인
+'''
 % docker pull hello-world
 Using default tag: latest
 latest: Pulling from library/hello-world
@@ -134,8 +139,10 @@ REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
 my-nginx      v1        c9085955cbdf   2 hours ago    62.4MB
 nginx         latest    4e5db4761e0f   2 weeks ago    161MB
 hello-world   latest    e2ac70e7319a   4 months ago   10.1kB
+'''
 
 #### 컨테이너: 실행/중지/목록 확인
+'''
 % docker run hello-world                        
 
 Hello from Docker!
@@ -168,9 +175,10 @@ CONTAINER ID   IMAGE     COMMAND                   CREATED          STATUS      
 CONTAINER ID   IMAGE         COMMAND                   CREATED          STATUS                      PORTS                                     NAMES
 7e4d7bd82c51   nginx         "/docker-entrypoint.…"   17 seconds ago   Up 16 seconds               0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-nginx
 0fc214599b44   hello-world   "/hello"                  24 seconds ago   Exited (0) 23 seconds ago                                             eloquent_tharp
-
+'''
 
 #### 운영: 로그 확인
+'''
 % docker logs my-nginx
 /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
@@ -193,17 +201,20 @@ CONTAINER ID   IMAGE         COMMAND                   CREATED          STATUS  
 2026/07/30 12:44:55 [notice] 1#1: start worker process 32
 2026/07/30 12:44:55 [notice] 1#1: start worker process 33
 2026/07/30 12:44:55 [notice] 1#1: start worker process 34
+'''
 
 #### 운영: 리소스 확인
+'''
 % docker stats --no-stream
 CONTAINER ID   NAME       CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
 7e4d7bd82c51   my-nginx   0.00%     6.309MiB / 15.67GiB   0.04%     1.13kB / 126B   16.8MB / 8.19kB   7
-
+'''
 
 
 ### 컨테이너 실행 실습
 
 #### 1. hello-world 실행
+'''
 % docker run hello-world
 
 Hello from Docker!
@@ -226,8 +237,10 @@ Share images, automate workflows, and more with a free Docker ID:
 
 For more examples and ideas, visit:
  https://docs.docker.com/get-started/
+'''
 
 #### 2. ubuntu 이미지 다운로드
+'''
 % docker pull ubuntu
 Using default tag: latest
 latest: Pulling from library/ubuntu
@@ -238,12 +251,16 @@ Status: Downloaded newer image for ubuntu:latest
 docker.io/library/ubuntu:latest
 % docker images | grep ubuntu
 ubuntu        latest    de7345b16e94   2 weeks ago    100MB
+'''
 
 #### 3. ubuntu 컨테이너 실행 및 내부 진입
+'''
 % docker run -it --name my-ubuntu ubuntu /bin/bash
 root@e60b2b13ea93:/#
+'''
 
 #### 4. 컨테이너 내부 명령 실행
+'''
 pwd
 /
 root@e60b2b13ea93:/# ls
@@ -268,32 +285,38 @@ BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
 UBUNTU_CODENAME=resolute
 LOGO=ubuntu-logo
+'''
 
 #### 5. 종료/유지 방식 차이 관찰
 
 ##### exit 사용 시 (컨테이너 종료)
+'''
 root@e60b2b13ea93:/# exit
 exit
 sh3737152398@c6r9s8 permission % docker ps -a | grep my-ubuntu
 e60b2b13ea93   ubuntu        "/bin/bash"               6 minutes ago    Exited (0) 18 seconds ago                                             my-ubuntu
 - STATUS: Exited)
-
+'''
 
 ##### Ctrl+P+Q 사용 시 (컨테이너 유지)
+'''
 % docker start -ai my-ubuntu
 root@e60b2b13ea93:/# %                                                            % docker ps | grep my-ubuntu
 e60b2b13ea93   ubuntu    "/bin/bash"               8 minutes ago    Up 16 seconds                                             my-ubuntu
+'''
 
 ##### exec 재진입
-
+'''
 % docker exec -it my-ubuntu /bin/bash
 root@e60b2b13ea93:/# 
+'''
 
 💡 attach vs exec 차이
 
 방식	명령어	특징
 attach	docker attach	기존 프로세스에 연결, exit 시 컨테이너 종료
 exec	docker exec -it	새 프로세스 생성, exit해도 컨테이너 유지
+
 
 #### 6. 종료/유지 방식 비교 정리
 
@@ -305,6 +328,7 @@ exec	docker exec -it	새 프로세스 생성, exit해도 컨테이너 유지
 | 재연결 | `docker attach` | Up 상태에서 연결 | 기존 세션에 재연결 (exit 시 종료 주의) |
 
 #### 7. 컨테이너 정리
+'''
 % docker stop my-ubuntu
 my-ubuntu
 % docker rm my-ubuntu
@@ -314,12 +338,13 @@ CONTAINER ID   IMAGE         COMMAND                   CREATED          STATUS  
 d63cad256633   hello-world   "/hello"                  12 minutes ago   Exited (0) 12 minutes ago                                             mystifying_euclid
 7e4d7bd82c51   nginx         "/docker-entrypoint.…"   20 minutes ago   Up 20 minutes               0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-nginx
 0fc214599b44   hello-world   "/hello"                  20 minutes ago   Exited (0) 20 minutes ago                                             eloquent_tharp
-
+'''
 
 
 ### 기존 Dockerfile 기반 커스텀 이미지 제작
 
 #### 
+'''
 % ls
 Dockerfile	html
 % docker build -t custom-nginx:1.0 .
@@ -374,23 +399,28 @@ Dockerfile	html
 </html>
 % docker inspect --format='{{.State.Health.Status}}' my-custom-nginx
 starting
-
+'''
 
 ### 포트 매핑 및 접속 증거
 
 #### 
+'''
 docker run -d \
   --name development-web \
   -p 8080:80 \
   development-workstation:1.0
 683d14a61eb68e92de2906dd0d7c8c5c95643628b297d5cbb0806698d6fdac5c
+'''
 
 #### 
+'''
 % docker ps
 CONTAINER ID   IMAGE                         COMMAND                   CREATED          STATUS          PORTS                                     NAMES
 683d14a61eb6   development-workstation:1.0   "/docker-entrypoint.…"   49 seconds ago   Up 48 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   development-web
+'''
 
 #### 
+'''
 curl http://localhost:8080
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -408,11 +438,12 @@ curl http://localhost:8080
 <p class="p1">Hello</p>
 </body>
 </html>
-
+'''
 
 ### 바인드 마운트 반영
 
 #### 
+'''
 docker run -d \
   --name bind-web \
   -p 8081:80 \
@@ -436,6 +467,7 @@ version 1
  % echo "version 2 - changed on host" > mount-test/index.html
  % curl http://localhost:8081
 version 2 - changed on host
+'''
 
 #### 
 
@@ -443,6 +475,7 @@ version 2 - changed on host
 ### Docker 볼륨 영속성 검증
 
 #### 
+'''
 % docker volume create workstation-data
 workstation-data
 % docker volume ls
@@ -459,8 +492,10 @@ local     workstation-data
 % docker exec volume-test bash -c 'echo "persistent data" > /data/hello.txt'
 % docker exec volume-test cat /data/hello.txt
 persistent data
+'''
 
 #### 
+'''
 % docker rm -f volume-test
 volume-test
 % docker volume ls
@@ -474,8 +509,10 @@ local     workstation-data
 80a7a29e7c9fd2c43881e1cda0e4584a560fc142faea6f0f548bfbf724451d7c
 % docker exec volume-test-2 cat /data/hello.txt
 persistent data
+'''
 
 #### 
+'''
 % docker volume inspect workstation-data
 [
     {
@@ -501,7 +538,7 @@ persistent data
         "Scope": "local"
     }
 ]
-sh3737152398@c6r10s8 E1-1 % docker inspect volume-test-2 
+% docker inspect volume-test-2 
 [
     {
         "Id": "80a7a29e7c9fd2c43881e1cda0e4584a560fc142faea6f0f548bfbf724451d7c",
@@ -728,3 +765,4 @@ sh3737152398@c6r10s8 E1-1 % docker inspect volume-test-2
     }
 ]
 
+'''
