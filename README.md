@@ -12,9 +12,9 @@
 - [O] 권한 변경 실습
 - [O] Docker 설치/점검
 - [O] hello-world 실행
-- [X] Dockerfile 빌드/실행
-- [X] 포트 매핑 접속(2회)
-- [X] 바인드 마운트 반영
+- [O] Dockerfile 빌드/실행
+- [O] 포트 매핑 접속
+- [O] 바인드 마운트 반영
 - [X] 볼륨 영속성
 - [O] Git 설정 + GitHub 연동
 

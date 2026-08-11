@@ -375,44 +375,356 @@ Dockerfile	html
 % docker inspect --format='{{.State.Health.Status}}' my-custom-nginx
 starting
 
-#### 
-
-
-#### 
-
-
 
 ### 포트 매핑 및 접속 증거
 
 #### 
-
+docker run -d \
+  --name development-web \
+  -p 8080:80 \
+  development-workstation:1.0
+683d14a61eb68e92de2906dd0d7c8c5c95643628b297d5cbb0806698d6fdac5c
 
 #### 
-
+% docker ps
+CONTAINER ID   IMAGE                         COMMAND                   CREATED          STATUS          PORTS                                     NAMES
+683d14a61eb6   development-workstation:1.0   "/docker-entrypoint.…"   49 seconds ago   Up 48 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   development-web
 
 #### 
+curl http://localhost:8080
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+  </style>
+</head>
+<body>
+<p class="p1">Hello</p>
+</body>
+</html>
 
+
+### 바인드 마운트 반영
+
+#### 
+docker run -d \
+  --name bind-web \
+  -p 8081:80 \
+  --mount type=bind,source="$(pwd)/mount-test",target=/usr/share/nginx/html \
+  nginx:alpine
+Unable to find image 'nginx:alpine' locally
+alpine: Pulling from library/nginx
+55afa1ecc21d: Already exists 
+3cd534fe98c6: Already exists 
+1223f016b4e4: Already exists 
+62bec68d7c31: Already exists 
+46f977ee452f: Already exists 
+d0008c891db4: Already exists 
+390dc935348d: Already exists 
+46519e7231d2: Already exists 
+Digest: sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac22d2a470c1752
+Status: Downloaded newer image for nginx:alpine
+3c8ce0f2bd326801e62fda3e1c6409b2081a8000b8fd3d6ff551dd9dfa56f47b
+ % curl http://localhost:8081
+version 1
+ % echo "version 2 - changed on host" > mount-test/index.html
+ % curl http://localhost:8081
+version 2 - changed on host
+
+#### 
 
 
 ### Docker 볼륨 영속성 검증
 
 #### 
+% docker volume create workstation-data
+workstation-data
+% docker volume ls
+DRIVER    VOLUME NAME
+local     workstation-data
 
+% docker run -d \
+  --name volume-test \
+  --mount source=workstation-data,target=/data \
+  ubuntu:24.04 \
+  sleep infinity
+7289c5315fddd93d5ac37f08d3be2d8541899b198587328a6c05399b2f86cda9
+
+% docker exec volume-test bash -c 'echo "persistent data" > /data/hello.txt'
+% docker exec volume-test cat /data/hello.txt
+persistent data
 
 #### 
-
+% docker rm -f volume-test
+volume-test
+% docker volume ls
+DRIVER    VOLUME NAME
+local     workstation-data
+% docker run -d \
+  --name volume-test-2 \
+  --mount source=workstation-data,target=/data \
+  ubuntu:24.04 \
+  sleep infinity
+80a7a29e7c9fd2c43881e1cda0e4584a560fc142faea6f0f548bfbf724451d7c
+% docker exec volume-test-2 cat /data/hello.txt
+persistent data
 
 #### 
+% docker volume inspect workstation-data
+[
+    {
+        "CreatedAt": "2026-08-11T17:33:41+09:00",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/workstation-data/_data",
+        "Name": "workstation-data",
+        "Options": null,
+        "Scope": "local"
+    }
+]
 
-
-
-### Git 설정 및 GitHub 연동
-
-#### 
-
-
-#### 
-
-
-#### 
+% docker volume inspect workstation-data
+[
+    {
+        "CreatedAt": "2026-08-11T17:33:41+09:00",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/workstation-data/_data",
+        "Name": "workstation-data",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+sh3737152398@c6r10s8 E1-1 % docker inspect volume-test-2 
+[
+    {
+        "Id": "80a7a29e7c9fd2c43881e1cda0e4584a560fc142faea6f0f548bfbf724451d7c",
+        "Created": "2026-08-11T08:52:27.85859517Z",
+        "Path": "sleep",
+        "Args": [
+            "infinity"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 785,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2026-08-11T08:52:27.913254068Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:045183670ef29ce21bc22a8d4f62511ce472679ca8fc9774f04181f7f383ca62",
+        "ResolvConfPath": "/var/lib/docker/containers/80a7a29e7c9fd2c43881e1cda0e4584a560fc142faea6f0f548bfbf724451d7c/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/80a7a29e7c9fd2c43881e1cda0e4584a560fc142faea6f0f548bfbf724451d7c/hostname",
+        "HostsPath": "/var/lib/docker/containers/80a7a29e7c9fd2c43881e1cda0e4584a560fc142faea6f0f548bfbf724451d7c/hosts",
+        "LogPath": "/var/lib/docker/containers/80a7a29e7c9fd2c43881e1cda0e4584a560fc142faea6f0f548bfbf724451d7c/80a7a29e7c9fd2c43881e1cda0e4584a560fc142faea6f0f548bfbf724451d7c-json.log",
+        "Name": "/volume-test-2",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {
+                    "max-file": "5",
+                    "max-size": "20m"
+                }
+            },
+            "NetworkMode": "bridge",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                16,
+                101
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "private",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 8413773824,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "BlkioDeviceReadIOps": [],
+            "BlkioDeviceWriteIOps": [],
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": null,
+            "Ulimits": [],
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "Mounts": [
+                {
+                    "Type": "volume",
+                    "Source": "workstation-data",
+                    "Target": "/data"
+                }
+            ],
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/interrupts",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware",
+                "/sys/devices/virtual/powercap"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "ID": "80a7a29e7c9fd2c43881e1cda0e4584a560fc142faea6f0f548bfbf724451d7c",
+                "LowerDir": "/var/lib/docker/overlay2/12e84180ed1298fbd25f4048b3c5e38ccb9c46ad640aac8800b7d029b51ba7df-init/diff:/var/lib/docker/overlay2/bdddb181ed4944855d3c66d84e49eadc971fcefee6fec0abceb562750e2583f3/diff",
+                "MergedDir": "/var/lib/docker/overlay2/12e84180ed1298fbd25f4048b3c5e38ccb9c46ad640aac8800b7d029b51ba7df/merged",
+                "UpperDir": "/var/lib/docker/overlay2/12e84180ed1298fbd25f4048b3c5e38ccb9c46ad640aac8800b7d029b51ba7df/diff",
+                "WorkDir": "/var/lib/docker/overlay2/12e84180ed1298fbd25f4048b3c5e38ccb9c46ad640aac8800b7d029b51ba7df/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "workstation-data",
+                "Source": "/var/lib/docker/volumes/workstation-data/_data",
+                "Destination": "/data",
+                "Driver": "local",
+                "Mode": "z",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+        "Config": {
+            "Hostname": "80a7a29e7c9f",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "sleep",
+                "infinity"
+            ],
+            "Image": "ubuntu:24.04",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "org.opencontainers.image.version": "24.04"
+            }
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "32db054ccb619608fa8c2ea6afff4dbd3433cb90d7b71e93103cbad6f042c049",
+            "SandboxKey": "/var/run/docker/netns/32db054ccb61",
+            "Ports": {},
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "60744a3e9817e0710cd35999fab4944f5656e2e874efbbb977e046039112e575",
+            "Gateway": "192.168.215.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "192.168.215.5",
+            "IPPrefixLen": 24,
+            "IPv6Gateway": "",
+            "MacAddress": "c6:09:26:8d:9c:59",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "MacAddress": "c6:09:26:8d:9c:59",
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "bbae33330e53b8e701ff86b4b6630f7fe61740af2354f26a2fb70b009ca444d3",
+                    "EndpointID": "60744a3e9817e0710cd35999fab4944f5656e2e874efbbb977e046039112e575",
+                    "Gateway": "192.168.215.1",
+                    "IPAddress": "192.168.215.5",
+                    "IPPrefixLen": 24,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        }
+    }
+]
 
