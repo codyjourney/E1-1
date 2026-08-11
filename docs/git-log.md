@@ -1,7 +1,7 @@
 ### Git 설정 및 GitHub 연동
 
 #### 
-'''
+```
 % git status
 On branch Main
 Your branch is up to date with 'origin/Main'.
@@ -21,7 +21,7 @@ c415190 Main
 99c3cea Main
 d70c2cc Main
 ca2d5b2 Main
-'''
+```
 #### 
 
 
