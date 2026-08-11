@@ -70,7 +70,7 @@ Bind Mount vs Volume 정리
 Docker 역시 bind mount는 호스트와 컨테이너 사이 파일 공유에, volume은 지속적인 데이터 저장에 적합하다고 설명합니다.
 
 - Git 설정 + GitHub 연동
-상세 로그: [Git 설정 및 GitHub 연동](./docs/docker-log.md)
+상세 로그: [Git 설정 및 GitHub 연동](./docs/git-log.md)
 상세 스크린샷: (./screenshots/Git.png)
 % git config --list
 credential.helper=osxkeychain
