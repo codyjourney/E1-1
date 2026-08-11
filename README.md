@@ -15,7 +15,7 @@
 - [O] Dockerfile 빌드/실행
 - [O] 포트 매핑 접속
 - [O] 바인드 마운트 반영
-- [X] 볼륨 영속성
+- [O] 볼륨 영속성
 - [O] Git 설정 + GitHub 연동
 
 ## 4. 검증 방법 + 결과 위치
@@ -60,8 +60,18 @@
 상세 로그: [바인드 마운트 반영](./docs/docker-log.md)
 - 볼륨 영속성
 상세 로그: [볼륨 영속성](./docs/docker-log.md)
+Bind Mount vs Volume 정리
+구분	Bind Mount	Docker Volume
+데이터 위치	호스트 경로 직접 지정	Docker가 관리
+주요 목적	개발 중 소스 변경 반영	데이터 영속성
+예시	./mount-test:/usr/share/nginx/html	workstation-data:/data
+호스트 파일 직접 접근	쉬움	직접 관리하지 않는 것이 일반적
+컨테이너 삭제 후 데이터	호스트에 남음	Volume이 남아 있으면 유지
+Docker 역시 bind mount는 호스트와 컨테이너 사이 파일 공유에, volume은 지속적인 데이터 저장에 적합하다고 설명합니다.
+
 - Git 설정 + GitHub 연동
-상세 스크린샷: (./screenshots/)
+상세 로그: [Git 설정 및 GitHub 연동](./docs/docker-log.md)
+상세 스크린샷: (./screenshots/Git.png)
 % git config --list
 credential.helper=osxkeychain
 user.name=홍길동
@@ -79,12 +89,10 @@ branch.Main.remote=origin
 branch.Main.merge=refs/heads/Main
 
 
-| 항목 | 검증 명령 | 결과 위치 |
-|------|-----------|-----------|
-| 포트 매핑 | curl http://localhost:8080 | screenshots/port-8080.png |
-| 볼륨 영속성 | docker exec ... cat /data/... | docs/docker-log.md#볼륨 |
-
-
 ## 5. 트러블슈팅
 상세 로그: [트러블슈팅 로그](./docs/troubleshooting.md)
+
+
+## 6. 참고
+https://chatgpt.com/share/6a7ae436-59ec-83ea-b675-e895c7b3acd8
 
