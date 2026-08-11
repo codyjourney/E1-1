@@ -1,14 +1,11 @@
 FROM nginx:alpine
 
-LABEL maintainer="myname" \
-      version="1.1"
+LABEL org.opencontainers.image.title="developer-workstation"
 
-COPY html/index.html /usr/share/nginx/html/index.html
-
-# ✅ mime.types 포함한 nginx 설정 추가
+# 복사: 커스텀 nginx 설정을 컨테이너의 conf.d 기본 설정으로 덮어씀
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 80
+# 복사: 사이트 컨텐츠
+COPY html/index.html /usr/share/nginx/html/index.html
 
-HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
-  CMD wget -qO- http://localhost/ || exit 1
+EXPOSE 80
