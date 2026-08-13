@@ -149,6 +149,11 @@ Dockerfile을 직접 작성하여 웹 서버를 커스텀 이미지로 만들고
 pwd
 ```
 
+실행 결과:
+
+```text
+[실제 pwd 출력]
+```
 
 ### 설명
 
@@ -178,6 +183,11 @@ ls
 ls -la
 ```
 
+실행 결과:
+
+```text
+[실제 ls -la 출력]
+```
 
 ### 설명
 
@@ -252,6 +262,12 @@ mkdir -p dev-workstation/app
 ls -la dev-workstation
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
+
 ## 7.2 디렉토리 이동
 
 ```bash
@@ -263,6 +279,13 @@ cd dev-workstation
 ```bash
 pwd
 ```
+
+실행 결과:
+
+```text
+[실제 출력]
+```
+
 ---
 
 # 8. 파일 생성 및 내용 확인
@@ -279,6 +302,12 @@ touch test.txt
 
 ```bash
 ls -la
+```
+
+실행 결과:
+
+```text
+[실제 출력]
 ```
 
 ## 8.2 파일 내용 확인
@@ -367,6 +396,12 @@ mv renamed.txt app/
 ls -la app
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
+
 ---
 
 # 11. 파일 삭제
@@ -423,6 +458,11 @@ touch permission-test.txt
 ls -l permission-test.txt
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
 
 예를 들어 다음과 같이 출력될 수 있다.
 
@@ -478,6 +518,12 @@ chmod 755 permission-test.txt
 ls -l permission-test.txt
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
+
 ## 755의 의미
 
 ```text
@@ -520,6 +566,12 @@ chmod 700 permission-dir
 
 ```bash
 ls -ld permission-dir
+```
+
+실행 결과:
+
+```text
+[실제 출력]
 ```
 
 ## 700의 의미
@@ -571,10 +623,22 @@ docker images
 docker --version
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
+
 ## 17.2 Docker 엔진 점검
 
 ```bash
 docker info
+```
+
+실행 결과:
+
+```text
+[실제 docker info 핵심 출력]
 ```
 
 `docker info`가 정상적으로 출력된다면 Docker CLI가 Docker 엔진과 정상적으로 통신하고 있음을 확인할 수 있다.
@@ -589,6 +653,11 @@ docker info
 docker images
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
 
 Docker 이미지와 컨테이너의 관계는 다음과 같다.
 
@@ -624,6 +693,12 @@ Docker가 정상적으로 동작하는지 가장 간단하게 확인하기 위�
 docker run hello-world
 ```
 
+실행 결과:
+
+```text
+[실제 hello-world 출력]
+```
+
 정상적으로 성공했다면 Docker 이미지 다운로드와 컨테이너 실행이 정상적으로 이루어진 것이다.
 
 ---
@@ -640,6 +715,12 @@ docker run -it --name ubuntu-practice ubuntu bash
 
 ```bash
 ls
+```
+
+실행 결과:
+
+```text
+[실제 출력]
 ```
 
 다음 명령도 실행한다.
@@ -707,6 +788,12 @@ docker ps
 docker ps -a
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
+
 ### 차이
 
 ```bash
@@ -731,6 +818,12 @@ docker ps -a
 docker logs <container_name_or_id>
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
+
 로그는 컨테이너 내부 애플리케이션이 출력한 정보를 확인할 때 사용할 수 있다.
 
 ---
@@ -741,6 +834,12 @@ docker logs <container_name_or_id>
 
 ```bash
 docker stats
+```
+
+실행 결과:
+
+```text
+[실제 출력]
 ```
 
 종료하려면:
@@ -858,6 +957,12 @@ Dockerfile이 있는 프로젝트 루트에서 실행한다.
 docker build -t my-custom-nginx:1.0 .
 ```
 
+실행 결과:
+
+```text
+[실제 docker build 출력]
+```
+
 이미지가 생성되었는지 확인한다.
 
 ```bash
@@ -913,6 +1018,12 @@ http://localhost:8080
 docker ps
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
+
 다음과 같은 포트 정보가 보이는지 확인한다.
 
 ```text
@@ -927,6 +1038,12 @@ docker ps
 
 ```bash
 curl http://localhost:8080
+```
+
+실행 결과:
+
+```html
+[실제 HTML 응답]
 ```
 
 ## 31.2 브라우저를 이용한 검증
@@ -970,6 +1087,11 @@ docker run -d \
 docker ps
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
 
 curl로 확인한다.
 
@@ -977,6 +1099,11 @@ curl로 확인한다.
 curl http://localhost:8081
 ```
 
+실행 결과:
+
+```html
+[실제 HTML 응답]
+```
 
 ### 확인 결과
 
@@ -1204,6 +1331,12 @@ mydata
 docker volume ls
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
+
 ---
 
 # 41. 볼륨 연결 컨테이너 실행
@@ -1245,6 +1378,12 @@ Persistent Docker Volume Data
 
 ```bash
 docker exec volume-test ls -la /data
+```
+
+실행 결과:
+
+```text
+[실제 출력]
 ```
 
 ---
@@ -1326,11 +1465,22 @@ Persistent Docker Volume Data
 docker images
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
 
 ## 실행 중인 컨테이너
 
 ```bash
 docker ps
+```
+
+실행 결과:
+
+```text
+[실제 출력]
 ```
 
 ## 전체 컨테이너
@@ -1339,6 +1489,11 @@ docker ps
 docker ps -a
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
 
 ## 컨테이너 로그
 
@@ -1346,6 +1501,11 @@ docker ps -a
 docker logs my-web
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
 
 ## 컨테이너 리소스
 
@@ -1353,10 +1513,22 @@ docker logs my-web
 docker stats
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
+
 ## 볼륨 목록
 
 ```bash
 docker volume ls
+```
+
+실행 결과:
+
+```text
+[실제 출력]
 ```
 
 ---
@@ -1385,6 +1557,12 @@ docker rm volume-test2
 
 ```bash
 docker ps -a
+```
+
+실행 결과:
+
+```text
+[실제 출력]
 ```
 
 > `mydata` 볼륨은 영속성 검증을 위해 삭제하지 않는다.
@@ -1491,6 +1669,12 @@ git init
 git status
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
+
 ---
 
 # 52. Git 기본 흐름
@@ -1557,6 +1741,11 @@ commit한다.
 git commit -m "feat: build development workstation"
 ```
 
+실행 결과:
+
+```text
+[실제 commit 출력]
+```
 
 commit 목록 확인:
 
@@ -1564,6 +1753,11 @@ commit 목록 확인:
 git log --oneline
 ```
 
+실행 결과:
+
+```text
+[실제 출력]
+```
 
 ---
 
@@ -1579,6 +1773,11 @@ dev-workstation
 
 README는 로컬에서 작성했으므로 로컬 프로젝트를 GitHub에 연결하는 방식으로 진행한다.
 
+생성한 Repository 주소:
+
+```text
+[본인의 GitHub Repository 주소]
+```
 
 ---
 
@@ -1594,6 +1793,12 @@ git remote add origin [본인의 GitHub Repository 주소]
 
 ```bash
 git remote -v
+```
+
+실행 결과:
+
+```text
+[실제 출력]
 ```
 
 ---
@@ -1618,6 +1823,12 @@ GitHub로 push한다.
 git push -u origin main
 ```
 
+실행 결과:
+
+```text
+[실제 git push 출력]
+```
+
 GitHub Repository에서 파일이 정상적으로 올라갔는지 확인한다.
 
 ---
@@ -1638,6 +1849,11 @@ VSCode에서 다음 항목을 확인한다.
 * 변경 사항 표시 확인
 * commit 및 push 상태 확인
 
+### 증거
+
+VSCode의 GitHub 로그인 및 Repository 연동이 확인되는 화면을 캡처하여 첨부한다.
+
+![VSCode GitHub 연동](screenshots/github.png)
 
 > 토큰, 비밀번호, 인증 코드 등의 민감한 정보가 화면에 표시되지 않도록 주의한다.
 
@@ -1721,6 +1937,11 @@ docker info
 
 정상적으로 Docker Engine 정보가 출력되면 문제를 해결한 것이다.
 
+## 실제 결과
+
+```text
+[실제 문제 발생 및 해결 결과 작성]
+```
 
 ---
 
@@ -1779,6 +2000,11 @@ http://localhost:8083
 
 이 된다.
 
+## 실제 결과
+
+```text
+[실제 문제 발생 및 해결 결과 작성]
+```
 
 ---
 
@@ -2146,6 +2372,18 @@ GitHub Repository
 
 # 69. 제출 시 주의사항
 
+## 69.1 실제 결과로 교체
+
+다음과 같은 placeholder는 제출 전에 모두 실제 결과로 교체한다.
+
+```text
+[실제 출력]
+[실제 결과]
+[실제 docker --version 출력]
+[실제 git --version 출력]
+[본인의 GitHub Repository 주소]
+[실제 문제 발생 및 해결 결과 작성]
+```
 
 ## 69.2 스크린샷 확인
 
@@ -2183,7 +2421,12 @@ SSH Private Key
 ---
 
 # 70. 최종 제출 정보
-ß
+
+## GitHub Repository
+
+```text
+[본인의 GitHub Repository 주소]
+```
 
 ## 주요 기술
 
