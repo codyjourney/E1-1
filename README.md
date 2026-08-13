@@ -18,61 +18,133 @@
 - [O] 볼륨 영속성
 - [O] Git 설정 + GitHub 연동
 
-## 4. 검증 방법 + 결과 위치
-- 터미널 기본 조작 및 폴더 구성
-상세 로그: [터미널 조작 로그](./docs/terminal-log.md)
-- 권한 변경 실습
+맞습니다. 제가 앞서 마크다운을 코드 블록 안에 넣었지만, 중첩된 코드 블록 때문에 그대로 복사하기 불편했습니다.
+아래 전체 영역을 한 번에 복사하면 README.md에 바로 붙여넣을 수 있습니다. 내부 코드 블록은 중첩을 피하기 위해 ~~~을 사용했습니다.
+
+## 4. 검증 방법
+
+### 4.1 터미널 기본 조작 및 폴더 구성
+
+터미널 기본 조작 및 폴더 구성 실습을 진행했습니다.
+
+- 상세 로그: [터미널 조작 로그](./docs/terminal-log.md)
+
+---
+
+### 4.2 권한 변경 실습
+
+Linux 파일 권한은 **소유자(Owner)**, **그룹(Group)**, **Others** 순서로 표시됩니다.
+
+~~~text
 -rwxr-xr-x
  ↑↑↑↑↑↑↑↑↑
  │└──┘└──┘└──┘
  │ 소유자  그룹  others
  │
  └ 파일 종류 (- = 파일, d = 디렉토리)
-숫자	의미	기호
-7	읽기+쓰기+실행	rwx
-6	읽기+쓰기	rw-
-5	읽기+실행	r-x
-4	읽기만	r--
-0	권한 없음	---
-상세 로그: [권한 실습 및 증거](./docs/terminal-log.md)
-- Docker 설치/점검
-상세 로그: [Docker 설치/점검](./docs/docker-log.md)
-운영 명령 요약
+~~~
+
+#### 권한 숫자 의미
+
+| 숫자 | 의미 | 기호 |
+|:---:|---|:---:|
+| `7` | 읽기 + 쓰기 + 실행 | `rwx` |
+| `6` | 읽기 + 쓰기 | `rw-` |
+| `5` | 읽기 + 실행 | `r-x` |
+| `4` | 읽기만 | `r--` |
+| `0` | 권한 없음 | `---` |
+
+- 상세 로그 및 증거: [권한 실습 및 증거](./docs/terminal-log.md)
+
+---
+
+### 4.3 Docker 설치 및 점검
+
+Docker 설치 및 기본 명령어를 확인하고 실습했습니다.
+
+- 상세 로그: [Docker 설치/점검](./docs/docker-log.md)
+
+#### Docker 운영 명령 요약
+
 | 분류 | 명령어 | 설명 |
-|------|--------|------|
+|---|---|---|
 | 이미지 | `docker pull` | 이미지 다운로드 |
 | 이미지 | `docker images` | 이미지 목록 확인 |
 | 컨테이너 | `docker run` | 컨테이너 실행 |
-| 컨테이너 | `docker ps` | 실행 중 목록 |
-| 컨테이너 | `docker ps -a` | 전체 목록 |
-| 운영 | `docker logs` | 로그 확인 |
-| 운영 | `docker stats` | 리소스 확인 |
+| 컨테이너 | `docker ps` | 실행 중인 컨테이너 목록 확인 |
+| 컨테이너 | `docker ps -a` | 전체 컨테이너 목록 확인 |
+| 운영 | `docker logs` | 컨테이너 로그 확인 |
+| 운영 | `docker stats` | 컨테이너 리소스 사용량 확인 |
 | 정리 | `docker stop` | 컨테이너 중지 |
 | 정리 | `docker rm` | 컨테이너 삭제 |
-- hello-world 실행
-상세 로그: [hello-world 실행](./docs/docker-log.md)
-- Dockerfile 빌드/실행
-상세 로그: [Dockerfile 빌드/실행](./docs/docker-log.md)
-- 포트 매핑 접속(2회)
-상세 로그: [포트 매핑 접속(2회)](./docs/docker-log.md)
-상세 스크린샷: (./screenshots/)
-- 바인드 마운트 반영
-상세 로그: [바인드 마운트 반영](./docs/docker-log.md)
-- 볼륨 영속성
-상세 로그: [볼륨 영속성](./docs/docker-log.md)
-Bind Mount vs Volume 정리
-구분	Bind Mount	Docker Volume
-데이터 위치	호스트 경로 직접 지정	Docker가 관리
-주요 목적	개발 중 소스 변경 반영	데이터 영속성
-예시	./mount-test:/usr/share/nginx/html	workstation-data:/data
-호스트 파일 직접 접근	쉬움	직접 관리하지 않는 것이 일반적
-컨테이너 삭제 후 데이터	호스트에 남음	Volume이 남아 있으면 유지
-Docker 역시 bind mount는 호스트와 컨테이너 사이 파일 공유에, volume은 지속적인 데이터 저장에 적합하다고 설명합니다.
 
-- Git 설정 + GitHub 연동
-상세 로그: [Git 설정 및 GitHub 연동](./docs/git-log.md)
-상세 스크린샷: (./screenshots/Git.png)
+---
+
+### 4.4 `hello-world` 실행
+
+Docker의 정상적인 설치 및 실행 여부를 확인하기 위해 `hello-world` 이미지를 실행했습니다.
+
+- 상세 로그: [hello-world 실행](./docs/docker-log.md)
+
+---
+
+### 4.5 Dockerfile 빌드 및 실행
+
+Dockerfile을 작성하고 이미지를 빌드한 후 컨테이너를 실행하는 과정을 실습했습니다.
+
+- 상세 로그: [Dockerfile 빌드/실행](./docs/docker-log.md)
+
+---
+
+### 4.6 포트 매핑 접속
+
+컨테이너의 포트를 호스트에 매핑하고 실제 접속이 정상적으로 이루어지는지 **2회** 확인했습니다.
+
+- 상세 로그: [포트 매핑 접속(2회)](./docs/docker-log.md)
+- 상세 스크린샷: [screenshots](./screenshots/)
+
+---
+
+### 4.7 바인드 마운트 반영
+
+호스트의 파일을 컨테이너에 바인드 마운트하여 호스트에서 변경한 내용이 컨테이너에 반영되는 것을 확인했습니다.
+
+- 상세 로그: [바인드 마운트 반영](./docs/docker-log.md)
+
+---
+
+### 4.8 볼륨 영속성
+
+Docker Volume을 이용하여 컨테이너가 삭제된 이후에도 데이터가 유지되는 것을 확인했습니다.
+
+- 상세 로그: [볼륨 영속성](./docs/docker-log.md)
+
+#### Bind Mount vs Volume
+
+| 구분 | Bind Mount | Docker Volume |
+|---|---|---|
+| 데이터 위치 | 호스트 경로 직접 지정 | Docker가 관리 |
+| 주요 목적 | 개발 중 소스 변경 반영 | 데이터 영속성 |
+| 예시 | `./mount-test:/usr/share/nginx/html` | `workstation-data:/data` |
+| 호스트 파일 직접 접근 | 쉬움 | 직접 관리하지 않는 것이 일반적 |
+| 컨테이너 삭제 후 데이터 | 호스트에 남음 | Volume이 남아 있으면 유지 |
+
+> Docker의 **Bind Mount**는 호스트와 컨테이너 사이의 파일 공유에 적합하고, **Volume**은 컨테이너와 독립적으로 데이터를 지속적으로 저장하는 데 적합합니다.
+
+---
+
+### 4.9 Git 설정 및 GitHub 연동
+
+Git 사용자 정보와 기본 브랜치를 설정하고, GitHub 원격 저장소와의 연결 상태를 확인했습니다.
+
+- 상세 로그: [Git 설정 및 GitHub 연동](./docs/git-log.md)
+- 상세 스크린샷: [Git 설정 화면](./screenshots/Git.png)
+
+#### Git 설정 및 저장소 정보
+
+~~~text
 % git config --list
+
 credential.helper=osxkeychain
 user.name=홍길동
 user.email=hong@example.com
@@ -87,6 +159,9 @@ remote.origin.url=https://github.com/[user]/E1-1.git
 remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
 branch.Main.remote=origin
 branch.Main.merge=refs/heads/Main
+~~~
+
+
 
 
 ## 5. 트러블슈팅
