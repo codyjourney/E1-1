@@ -2130,65 +2130,7 @@ curl http://localhost:8082
 
 를 실행한다.
 
-## 실제 결과
 
-```text
-[실제 문제 발생 및 해결 결과 작성]
-```
-
----
-
-# 62. 검증 결과 체크리스트
-
-* [ ] 현재 위치 확인 (`pwd`)
-* [ ] 목록 확인 (`ls`, `ls -la`)
-* [ ] 디렉토리 이동 (`cd`)
-* [ ] 디렉토리 생성 (`mkdir`)
-* [ ] 파일 생성 (`touch`)
-* [ ] 파일 내용 확인 (`cat`)
-* [ ] 파일 복사 (`cp`)
-* [ ] 파일 이동/이름 변경 (`mv`)
-* [ ] 파일 삭제 (`rm`)
-* [ ] 파일 권한 확인 (`ls -l`)
-* [ ] 파일 권한 변경 (`chmod`)
-* [ ] 디렉토리 권한 변경 (`chmod`)
-* [ ] Docker 버전 확인
-* [ ] Docker 엔진 상태 확인
-* [ ] Docker 이미지 목록 확인
-* [ ] `hello-world` 실행
-* [ ] Ubuntu 컨테이너 실행
-* [ ] 컨테이너 내부 명령 실행
-* [ ] `docker ps` 확인
-* [ ] `docker ps -a` 확인
-* [ ] `docker logs` 실행
-* [ ] `docker stats` 실행
-* [ ] Dockerfile 작성
-* [ ] 커스텀 이미지 빌드
-* [ ] 커스텀 컨테이너 실행
-* [ ] 포트 매핑 설정
-* [ ] 브라우저 또는 curl 접속 성공
-* [ ] 다른 호스트 포트로 추가 실행
-* [ ] 바인드 마운트 실행
-* [ ] 호스트 파일 변경
-* [ ] 변경 사항 컨테이너 반영 확인
-* [ ] Docker 볼륨 생성
-* [ ] 볼륨 연결
-* [ ] 볼륨 데이터 생성
-* [ ] 컨테이너 삭제
-* [ ] 새 컨테이너에서 데이터 유지 확인
-* [ ] Git 사용자 정보 설정
-* [ ] Git 기본 브랜치 설정
-* [ ] `git config --list` 확인
-* [ ] Git Repository 초기화
-* [ ] Git commit
-* [ ] GitHub Repository 생성
-* [ ] 원격 Repository 연결
-* [ ] GitHub push
-* [ ] VSCode GitHub 연동
-* [ ] 트러블슈팅 2건 이상 작성
-* [ ] 민감정보 노출 여부 확인
-
----
 
 # 63. 증거 자료
 
@@ -2404,62 +2346,6 @@ GitHub Repository
 
 ---
 
-# 66. 제출 전 최종 확인
-
-README와 Repository를 제출하기 전에 다음 항목을 다시 확인한다.
-
-* [ ] README에 실제 실행 결과를 입력했는가?
-* [ ] `[실제 출력]`, `[실제 결과]` 등의 placeholder를 모두 제거했는가?
-* [ ] Docker 버전을 실제 값으로 작성했는가?
-* [ ] Git 버전을 실제 값으로 작성했는가?
-* [ ] 실제 GitHub Repository 주소를 작성했는가?
-* [ ] Dockerfile이 Repository에 존재하는가?
-* [ ] `app/index.html`이 존재하는가?
-* [ ] 브라우저 주소창과 결과 화면이 포함된 스크린샷이 있는가?
-* [ ] 바인드 마운트 변경 전/후 증거가 있는가?
-* [ ] Docker Volume 삭제 전/후 증거가 있는가?
-* [ ] `docker images` 결과가 있는가?
-* [ ] `docker ps -a` 결과가 있는가?
-* [ ] `docker logs` 결과가 있는가?
-* [ ] `docker stats` 실행 기록이 있는가?
-* [ ] `docker info` 실행 기록이 있는가?
-* [ ] Git 설정 결과가 있는가?
-* [ ] GitHub push 결과가 있는가?
-* [ ] VSCode GitHub 연동 증거가 있는가?
-* [ ] 트러블슈팅이 최소 2건 이상 작성되어 있는가?
-* [ ] 토큰이나 비밀번호가 포함되어 있지 않은가?
-* [ ] SSH Private Key가 포함되어 있지 않은가?
-* [ ] 개인정보가 필요한 경우 적절히 마스킹했는가?
-
----
-
-# 67. Repository 최종 구조
-
-최종 Repository는 다음과 같은 형태를 권장한다.
-
-```text
-dev-workstation/
-├── README.md
-├── Dockerfile
-├── app/
-│   └── index.html
-├── bind-site/
-│   └── index.html
-└── screenshots/
-    ├── docker-version.png
-    ├── docker-container.png
-    ├── browser.png
-    ├── bind-mount.png
-    ├── docker-volume.png
-    └── github.png
-```
-
-README에는 실제 수행 결과와 증거 자료를 연결하여 기술한다.
-
-이 Repository만 확인해도 터미널 → 권한 → Docker → Dockerfile → 포트 → 바인드 마운트 → 볼륨 → Git → GitHub까지 전체 수행 과정을 재현할 수 있도록 구성한다.
-
----
-
 # 68. 전체 실습 수행 순서
 
 실제 과제 수행 시 다음 순서로 진행한다.
@@ -2622,29 +2508,6 @@ GitHub
 VSCode
 ```
 
-## 최종 검증
-
-```text
-터미널 조작                  : 완료
-파일 권한 실습               : 완료
-Docker 설치/점검             : 완료
-hello-world 실행             : 완료
-Ubuntu 컨테이너 실행         : 완료
-Docker 운영 명령             : 완료
-Dockerfile 작성              : 완료
-커스텀 이미지 빌드           : 완료
-웹 서버 컨테이너 실행        : 완료
-포트 매핑                    : 완료
-브라우저/curl 접속            : 완료
-바인드 마운트                : 완료
-볼륨 영속성                  : 완료
-Git 설정                     : 완료
-GitHub 연동                  : 완료
-VSCode 연동                  : 완료
-트러블슈팅                   : 완료
-증거 자료                    : 완료
-개인정보 및 민감정보 검토    : 완료
-```
 
 ---
 
