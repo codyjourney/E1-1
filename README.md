@@ -140,19 +140,6 @@ Dockerfile을 직접 작성하여 웹 서버를 커스텀 이미지로 만들고
 
 # 3. 실행 환경
 
-## 3.1 시스템 정보
-
-> 아래 값은 실제 환경에서 명령어를 실행한 결과로 변경한다.
-
-| 항목                | 환경                                               |
-| ----------------- | ------------------------------------------------ |
-| OS                | `[실제 OS 입력]`                                     |
-| Shell             | `[예: zsh / bash]`                                |
-| Terminal          | `[예: macOS Terminal / iTerm2 / VSCode Terminal]` |
-| Docker 실행 환경      | `[예: OrbStack]`                                  |
-| Docker Version    | `[실제 결과 입력]`                                     |
-| Git Version       | `[실제 결과 입력]`                                     |
-| GitHub Repository | `[본인의 GitHub Repository 주소]`                     |
 
 ## 3.2 Docker 버전 확인
 
