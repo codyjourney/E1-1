@@ -1479,11 +1479,6 @@ init.defaultbranch=main
 git init
 ```
 
-실행 결과:
-
-```text
-[실제 git init 출력]
-```
 
 상태를 확인한다.
 
@@ -1840,34 +1835,6 @@ curl http://localhost:8082
 
 
 
-# 63. 증거 자료
-
-## 63.1 Docker 버전
-
-![Docker Version](screenshots/docker-version.png)
-
-## 63.2 Docker 컨테이너
-
-![Docker Container](screenshots/docker-container.png)
-
-## 63.3 웹 서버 접속
-
-![Web Server](screenshots/browser.png)
-
-## 63.4 바인드 마운트
-
-![Bind Mount](screenshots/bind-mount.png)
-
-## 63.5 Docker Volume
-
-![Docker Volume](screenshots/docker-volume.png)
-
-## 63.6 GitHub / VSCode 연동
-
-![GitHub VSCode](screenshots/github.png)
-
----
-
 # 64. 핵심 개념 정리
 
 ## 64.1 절대 경로와 상대 경로
@@ -2183,7 +2150,6 @@ SSH Private Key
 ---
 
 # 70. 최종 제출 정보
-ß
 
 ## 주요 기술
 
