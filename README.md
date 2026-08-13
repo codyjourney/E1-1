@@ -136,30 +136,6 @@ Dockerfile을 직접 작성하여 웹 서버를 커스텀 이미지로 만들고
 * Git 기본 설정 및 GitHub Repository 연동
 * 실행 결과와 로그를 이용하여 작업 결과 검증
 
----
-
-# 4. 프로젝트 디렉토리 구성
-
-프로젝트 전체 작업은 하나의 작업 디렉토리에서 관리한다.
-
-최종적으로 다음과 같은 구조를 권장한다.
-
-```text
-dev-workstation/
-├── README.md
-├── Dockerfile
-├── app/
-│   └── index.html
-├── bind-site/
-│   └── index.html
-└── screenshots/
-    ├── docker-version.png
-    ├── docker-container.png
-    ├── browser.png
-    ├── bind-mount.png
-    ├── docker-volume.png
-    └── github.png
-```
 
 ---
 
