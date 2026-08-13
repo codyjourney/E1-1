@@ -1020,12 +1020,6 @@ Hello Docker!
 My custom Docker web server is running.
 ```
 
-### 증거
-
-브라우저 주소창과 페이지 내용이 함께 보이는 스크린샷을 첨부한다.
-
-![Docker 웹 서버 접속 결과](screenshots/browser.png)
-
 ---
 
 # 32. 다른 호스트 포트로 동일 이미지 실행
