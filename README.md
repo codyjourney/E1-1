@@ -1155,12 +1155,6 @@ docker ps
 curl http://localhost:8082
 ```
 
-실행 결과:
-
-```html
-[Before Change HTML 응답]
-```
-
 ---
 
 # 37. 호스트 파일 변경
@@ -1193,12 +1187,6 @@ cat bind-site/index.html
 
 ```bash
 curl http://localhost:8082
-```
-
-실행 결과:
-
-```html
-[After Change HTML 응답]
 ```
 
 ### 검증 결과
@@ -2252,9 +2240,4 @@ Docker Volume 실습에서는 컨테이너를 삭제한 이후에도 동일한 �
 마지막으로 Git을 이용하여 로컬 변경 이력을 관리하고 GitHub를 이용하여 원격 Repository에 코드를 공유함으로써 기본적인 협업 환경을 구성했다.
 
 이를 통해 개발 환경을 단순히 "내 컴퓨터에서 실행되는 환경"으로 만드는 것이 아니라, 다른 환경에서도 동일한 방식으로 실행하고 검증할 수 있는 재현 가능한 개발 환경으로 구성하는 기본적인 사고방식을 익혔다.
-
-
-
-## 7. 참고
-https://chatgpt.com/share/6a7ae436-59ec-83ea-b675-e895c7b3acd8
 
