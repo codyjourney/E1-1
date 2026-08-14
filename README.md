@@ -1512,16 +1512,6 @@ git config --list
 git config --global --list
 ```
 
-실행 결과:
-
-```text
-[실제 git config 결과]
-
-user.name=YOUR_NAME
-user.email=YOUR_EMAIL
-init.defaultbranch=main
-```
-
 > 이메일 주소 등 개인 정보가 제출 문서에 포함되는 것이 문제가 된다면 일부를 마스킹하여 기록한다.
 
 ---
